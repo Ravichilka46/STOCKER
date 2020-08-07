@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+    {%for i in post%}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                <a class="mr-2" href="#">{{ i.name }}</a>
+                <small class="text-muted">{{ i.work}}</small>
+                </div>
+            </div>
+        </article>
+
+    {%endfor%}
+
+
+
+
+
+{% endblock content %}
+
+
