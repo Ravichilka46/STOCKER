@@ -26,17 +26,6 @@ def home(request):
 def about(request):
     return render(request,'about.html')
 
-
-# Create your views here.
-import csv 
-a=[]
-b=("G:\TRYING.csv")
-with open(b) as fh:
-    rd = csv.DictReader(fh, delimiter=',')
-    for row in rd:
-        a.append(row)
-  
-#print(a)
 class HomeView(View): 
     def get(self, request, *args, **kwargs): 
         return render(request, 'index.html') 
