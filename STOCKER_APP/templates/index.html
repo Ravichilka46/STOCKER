@@ -20,12 +20,9 @@
 </center> 
 <hr /> 
 <div class="row"> 
-	<div class="col-md-6"> 
-	<canvas id="myChartline"></canvas> 
-	</div> 
-	<div class="col-md-6"> 
-	<canvas id="myChartBar"></canvas> 
-	</div> 
+	<div class="chart-container" style="position: relative; height:100vh; width:250vw"> 
+	<canvas id="chart"></canvas> 
+	</div>  
 </div> 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> 
@@ -37,8 +34,7 @@
 	method: "GET", 
 	url: endpoint, 
 	success: function(data) { 
-		drawLineGraph(data, 'myChartline'); 
-		drawBarGraph(data, 'myChartBar'); 
+		drawLineGraph(data, 'chart'); 
 		console.log("drawing"); 
 	}, 
 	error: function(error_data) { 
@@ -63,8 +59,8 @@
 		labels: labels, 
 		datasets: [{ 
 			label: chartLabel, 
-			backgroundColor: 'rgb(255, 100, 200)', 
-			borderColor: 'rgb(55, 99, 132)', 
+			backgroundColor: 'rgb(77, 255, 107)', 
+			borderColor: 'rgb(134, 129, 161)', 
 			data: chartdata, 
 		}] 
 		}, 
