@@ -3,7 +3,27 @@ from django.views.generic import View
    
 from rest_framework.views import APIView 
 from rest_framework.response import Response 
-   
+import pandas as pd
+
+
+a=pd.read_csv('G:\BACKedUP.csv')
+
+date_list= a['Date'].to_list()
+#print(date_list)
+close_list= a['Close Price'].to_list()
+#print(close_list)
+open_list= a['Open Price'].to_list()
+#print(open_list)
+low_list= a['Low Price'].to_list()
+high_list= a['High Price'].to_list()
+#print(low_list)
+#print(high_list)
+change_percent=a['Spread Close-Open'].to_list()
+# print(change_percent)    
+
+
+
+
 
 post=[{
     'name':'RELIANCE',
@@ -34,18 +54,10 @@ class ChartData(APIView):
     authentication_classes = [] 
     permission_classes = [] 
    
-    def get(self, request, format = None): 
-        labels = [ 
-            'January', 
-            'February',  
-            'March',  
-            'April',  
-            'May',  
-            'June',  
-            'July'
-            ] 
+    def get(self, request, format = None):         
+        labels = date_list
         chartLabel = "my data"
-        chartdata = [0, 10, 5, 2, 20, 30, 45] 
+        chartdata = close_list
         data ={ 
                      "labels":labels, 
                      "chartLabel":chartLabel, 

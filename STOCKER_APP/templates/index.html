@@ -20,7 +20,7 @@
 </center> 
 <hr /> 
 <div class="row"> 
-	<div class="chart-container" style="position: relative; height:100vh; width:250vw"> 
+	<div class="chart-container" style="position: relative; height:300vh; width:500vw"> 
 	<canvas id="chart"></canvas> 
 	</div>  
 </div> 
@@ -54,15 +54,17 @@
 		type: 'line', 
 
 		// The data for our dataset 
-		
 		data: { 
 		labels: labels, 
 		datasets: [{ 
 			label: chartLabel, 
-			backgroundColor: 'rgb(77, 255, 107)', 
+			backgroundColor: 'rgb(217, 212, 255)', 
 			borderColor: 'rgb(134, 129, 161)', 
-			data: chartdata, 
-		}] 
+			data: chartdata,
+			pointRadius: 0,
+			lineTension: 0, 
+		}]
+
 		}, 
 
 		// Configuration options go here 
@@ -75,11 +77,12 @@
 			ticks: { 
 				beginAtZero: true 
 			} 
-			}] 
+			}],
 		} 
-		} 
+		}
 }); 
 } 
+
 </script> 
 </body> 
 
