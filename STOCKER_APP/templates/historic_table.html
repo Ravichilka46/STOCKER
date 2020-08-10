@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="table-responsive text-nowrap">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">DATE</th>
+        <th scope="col">Close_Price</th>
+        <th scope="col">High_Price</th>
+        <th scope="col">Low_Price</th>
+        <th scope="col">Open_Price</th>
+        <th scope="col">Change_in_Percent</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%for i in Historic_Table%}
+        <tr>
+            <th scope="row"></th>
+            <td>{{i.Date}}</td>
+            <td>{{i.Close_price}}</td>
+            <td>{{i.High_Price}}</td>
+            <td>{{i.Low_Price}}</td>
+            <td>{{i.Open_Price}}</td>
+            <td>{{i.change}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+
+
+
+
+{% endblock content %}

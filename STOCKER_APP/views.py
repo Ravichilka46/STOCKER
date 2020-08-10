@@ -13,7 +13,7 @@ close_list= a['Close Price'].to_list()
 open_list= a['Open Price'].to_list()
 low_list= a['Low Price'].to_list()
 high_list= a['High Price'].to_list()
-change_percent=a['Spread Close-Open'].to_list()
+change_percent=a['Change(%)'].to_list()
    
 oneyear_date=[]
 for i in range(507,len(date_list)):
@@ -34,7 +34,11 @@ for i in range(507,len(date_list)):
 oneyear_high=[]
 for i in range(507,len(date_list)):
     oneyear_high.append(high_list[i])
-        
+
+
+oneyear_change=[]
+for i in range(507,len(date_list)):
+    oneyear_change.append(change_percent[i])        
 
 
 onemonth_date=[]
@@ -128,3 +132,20 @@ class ChartData3(APIView):
                      "chartdata":chartdata, 
              } 
         return Response(data) 
+
+def HistoricData(request):
+    Historic_Table=[]
+    for i in range(len(oneyear_date)):
+        Historic_dict={}
+
+        Historic_dict['Date']=oneyear_date[i]
+        Historic_dict['Close_price']=oneyear_close[i]
+        Historic_dict['High_Price']=oneyear_high[i]
+        Historic_dict['Low_Price']=oneyear_low[i]
+        Historic_dict['Open_Price']=oneyear_open[i]
+        Historic_dict['change']=oneyear_change[i]
+
+        Historic_Table.append(Historic_dict)
+
+        context={"Historic_Table": Historic_Table}
+    return render(request,'historic_table.html',context)      
