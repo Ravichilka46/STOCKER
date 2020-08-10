@@ -4,6 +4,10 @@ from django.views.generic import View
 from rest_framework.views import APIView 
 from rest_framework.response import Response 
 import pandas as pd
+import requests,sys
+from bs4 import BeautifulSoup
+
+
 
 
 a=pd.read_csv('G:\BACKedUP.csv')
@@ -149,3 +153,26 @@ def HistoricData(request):
 
         context={"Historic_Table": Historic_Table}
     return render(request,'historic_table.html',context)      
+
+def live(request):
+
+    url=("https://economictimes.indiatimes.com/reliance-industries-ltd/stocks/companyid-13215.cms")
+    r=requests.get(url)
+
+    htmlcontent=r.content
+
+    soup=BeautifulSoup(htmlcontent,'html.parser')
+    time=soup.find_all("div",class_="nse_d dateTime")
+    a=[]
+    for i in (time):
+        try:
+            b=i.find("span",class_="_date").text
+            a.append(b)
+            sys.exit()
+        except:
+            continue
+    #print(a[0])  
+    context={"live":a[0]}
+    return render(request,'live.html',context)   
+
+
