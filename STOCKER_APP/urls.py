@@ -8,5 +8,6 @@ urlpatterns = [
     path('subnav', views.subnav,name="Subnav"),
     path('chart', views.HomeView.as_view()), 
     path('api', views.ChartData.as_view()),
-    
+    path('oneyear', views.HomeView2.as_view()), 
+    path('api2', views.ChartData2.as_view()),
 ]

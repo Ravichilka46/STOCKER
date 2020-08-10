@@ -9,21 +9,32 @@ import pandas as pd
 a=pd.read_csv('G:\BACKedUP.csv')
 
 date_list= a['Date'].to_list()
-#print(date_list)
 close_list= a['Close Price'].to_list()
-#print(close_list)
 open_list= a['Open Price'].to_list()
-#print(open_list)
 low_list= a['Low Price'].to_list()
 high_list= a['High Price'].to_list()
-#print(low_list)
-#print(high_list)
 change_percent=a['Spread Close-Open'].to_list()
-# print(change_percent)    
+   
+oneyear_date=[]
+for i in range(507,len(date_list)-1):
+    oneyear_date.append(date_list[i])
 
+oneyear_close=[]
+for i in range(507,len(date_list)-1):
+    oneyear_close.append(close_list[i])
 
+oneyear_open=[]
+for i in range(507,len(date_list)-1):
+    oneyear_open.append(open_list[i])
+    
+oneyear_low=[]
+for i in range(507,len(date_list)-1):
+    oneyear_low.append(low_list[i])
 
-
+oneyear_high=[]
+for i in range(507,len(date_list)-1):
+    oneyear_high.append(high_list[i])
+        
 
 post=[{
     'name':'RELIANCE',
@@ -56,7 +67,7 @@ class ChartData(APIView):
    
     def get(self, request, format = None):         
         labels = date_list
-        chartLabel = "my data"
+        chartLabel = "Price"
         chartdata = close_list
         data ={ 
                      "labels":labels, 
@@ -67,3 +78,23 @@ class ChartData(APIView):
 
 def subnav(request):
     return render(request,'subnav.html')
+
+
+class HomeView2(View): 
+    def get(self, request, *args, **kwargs): 
+        return render(request, 'oneyear.html') 
+   
+class ChartData2(APIView): 
+    authentication_classes = [] 
+    permission_classes = [] 
+   
+    def get(self, request, format = None):         
+        labels = oneyear_date
+        chartLabel = "Price"
+        chartdata = oneyear_close
+        data ={ 
+                     "labels":labels, 
+                     "chartLabel":chartLabel, 
+                     "chartdata":chartdata, 
+             } 
+        return Response(data) 
