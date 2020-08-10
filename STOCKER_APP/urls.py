@@ -5,6 +5,7 @@ from STOCKER_APP import views
 urlpatterns = [
     path('', views.home,name="Home"),
     path('about', views.about,name="About"),
+    path('subnav', views.subnav,name="Subnav"),
     path('chart', views.HomeView.as_view()), 
     path('api', views.ChartData.as_view()),
     

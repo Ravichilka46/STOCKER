@@ -64,3 +64,6 @@ class ChartData(APIView):
                      "chartdata":chartdata, 
              } 
         return Response(data)   
+
+def subnav(request):
+    return render(request,'subnav.html')
