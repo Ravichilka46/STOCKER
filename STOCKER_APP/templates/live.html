@@ -1,8 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <a>LAST UPDATED...</a>
-    <a>{{live}}</a>
-
+    <a>LAST UPDATED...{{update}}</a>
+    <br>
+    <br>
+    <br>
+    <a>LIVE:::{{live_price}}</a>
+    <br>
+    <a>! :::{{arrow}}</a>
+    <br>
+    <a>Volumes:::{{volume}}</a>
+    <br>
+    <br>
+    <a>-----------TODAY'S -----------</a>
+    <br>
+    <a>Open_Price:::{{Open_price}}</a>
+    <br>
+    <a>Previous Close Price:::{{Prev_price}}</a>
 
 {% endblock content %}

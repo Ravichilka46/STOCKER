@@ -4,11 +4,8 @@ from django.views.generic import View
 from rest_framework.views import APIView 
 from rest_framework.response import Response 
 import pandas as pd
-import requests,sys
+import requests
 from bs4 import BeautifulSoup
-
-
-
 
 a=pd.read_csv('G:\BACKedUP.csv')
 
@@ -168,11 +165,63 @@ def live(request):
         try:
             b=i.find("span",class_="_date").text
             a.append(b)
-            sys.exit()
         except:
             continue
     #print(a[0])  
-    context={"live":a[0]}
+    price=soup.find_all(class_="stockInfo")
+    live_price=[]
+    for i in price:
+        try:
+            z=i.find(class_="value").text
+            live_price.append(z)
+        except:
+            continue
+    #print(live_price)
+    arrow=soup.find_all(class_="data")
+    arr=[]
+    for i in arrow:
+        try:
+            q=i.find(id="nsePercentChange").text
+            arr.append(q)
+        except:
+            continue
+    #print(arr)
+    volume=soup.find_all(class_="Volume")
+    vol=[]
+    for i in volume:
+        try:
+            w=i.find(id="nseVolume").text
+            vol.append(w)
+        except:
+            continue
+    #print(vol)
+    openn=soup.find_all(class_="Openprice")
+    open_price=[]
+    prev_price=[]
+    for i in openn:
+        try:
+            oo=i.find(id="nseOpenprice").text
+            open_price.append(oo)
+        except:
+            continue
+    #print(open_price)
+    pre=soup.find_all(class_="Closeprice")
+    for i in pre:
+        try:
+            pre=i.find(id="nseCloseprice").text
+            prev_price.append(oo)
+        except:
+            continue
+    #print(prev_price)
+
+    context={
+        "update":a[0],
+        "live_price":live_price[0],
+        "arrow":arr[0],
+        "volume":vol[0],
+        "Open_price":open_price[0],
+        "Prev_price":prev_price[0]    
+    }
     return render(request,'live.html',context)   
 
 
