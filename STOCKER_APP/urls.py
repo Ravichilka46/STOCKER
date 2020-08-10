@@ -10,4 +10,6 @@ urlpatterns = [
     path('api', views.ChartData.as_view()),
     path('oneyear', views.HomeView2.as_view()), 
     path('api2', views.ChartData2.as_view()),
+    path('onemonth', views.HomeView3.as_view()), 
+    path('api3', views.ChartData3.as_view()),
 ]

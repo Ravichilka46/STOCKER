@@ -16,25 +16,35 @@ high_list= a['High Price'].to_list()
 change_percent=a['Spread Close-Open'].to_list()
    
 oneyear_date=[]
-for i in range(507,len(date_list)-1):
+for i in range(507,len(date_list)):
     oneyear_date.append(date_list[i])
 
 oneyear_close=[]
-for i in range(507,len(date_list)-1):
+for i in range(507,len(date_list)):
     oneyear_close.append(close_list[i])
 
 oneyear_open=[]
-for i in range(507,len(date_list)-1):
+for i in range(507,len(date_list)):
     oneyear_open.append(open_list[i])
     
 oneyear_low=[]
-for i in range(507,len(date_list)-1):
+for i in range(507,len(date_list)):
     oneyear_low.append(low_list[i])
 
 oneyear_high=[]
-for i in range(507,len(date_list)-1):
+for i in range(507,len(date_list)):
     oneyear_high.append(high_list[i])
         
+
+
+onemonth_date=[]
+for i in range(732,len(date_list)):
+    onemonth_date.append(date_list[i])
+
+onemonth_close=[]
+for i in range(732,len(date_list)):
+    onemonth_close.append(close_list[i])
+
 
 post=[{
     'name':'RELIANCE',
@@ -92,6 +102,26 @@ class ChartData2(APIView):
         labels = oneyear_date
         chartLabel = "Price"
         chartdata = oneyear_close
+        data ={ 
+                     "labels":labels, 
+                     "chartLabel":chartLabel, 
+                     "chartdata":chartdata, 
+             } 
+        return Response(data) 
+
+
+class HomeView3(View): 
+    def get(self, request, *args, **kwargs): 
+        return render(request, 'onemonth.html') 
+   
+class ChartData3(APIView): 
+    authentication_classes = [] 
+    permission_classes = [] 
+   
+    def get(self, request, format = None):         
+        labels = onemonth_date
+        chartLabel = "Price"
+        chartdata = onemonth_close
         data ={ 
                      "labels":labels, 
                      "chartLabel":chartLabel, 
