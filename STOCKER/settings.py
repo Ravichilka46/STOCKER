@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'chartjs',
     'rest_framework',
     'STOCKER_APP',
+    
 ]
 
 MIDDLEWARE = [
