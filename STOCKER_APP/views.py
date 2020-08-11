@@ -7,7 +7,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
-a=pd.read_csv('G:\BACKedUP.csv')
+a=pd.read_csv('BACKedUP.csv')
 
 date_list= a['Date'].to_list()
 close_list= a['Close Price'].to_list()
