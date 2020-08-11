@@ -8,32 +8,26 @@
     <li class="breadcrumb-item active">Live</li>
   </ol>
 </nav>
+<h2 class="text-danger">LIVE::</h2>
+<br>
+<h4>LAST UPDATED...{{update}}</h4>
+<br>
+<div class="card-columns">
+  <div class="card bg-primary">
+    <div class="card-body text-center">
+      <h4 class="card-text">{{live_price}}      {{arrow}}</h4>
+    </div>
+  </div>
+</div>  
 <br>
 <br>
-
-
-    <h1 class="text-danger">LIVE::</h1>
-    <br>
-    <br>
-    <a>LAST UPDATED...{{update}}</a>
-    <br>
-    <br>
-    <div class="card-columns">
-      <div class="card bg-primary">
-        <div class="card-body text-center">
-          <p class="card-text">{{live_price}}      {{arrow}}</p>
-        </div>
-      </div>
-    </div>  
-    <br>
-    <br>
-    <a>Volumes:::{{volume}}</a>
-    <br>
-    <br>
-    <a>-----------TODAY'S -----------</a>
-    <br>
-    <a>Open_Price:::{{Open_price}}</a>
-    <br>
-    <a>Previous Close Price:::{{Prev_price}}</a>
+<h4>Volumes:::{{volume}}</h4>
+<br>
+<br>
+<h3>-----------TODAY'S -----------</h3>
+<br>
+<h4>Open_Price:::{{Open_price}}</h4>
+<br>
+<h4>Previous Close Price:::{{Prev_price}}</h4>
 
 {% endblock content %}
