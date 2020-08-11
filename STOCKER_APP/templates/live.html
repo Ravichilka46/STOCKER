@@ -1,13 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb purple lighten-4">
-    <li class="breadcrumb-item"><a class="black-text" href="/">Home</a></li>
-    <li class="breadcrumb-item"><a class="black-text" href="/subnav">Reliance</a></li>
-    <li class="breadcrumb-item active">Live</li>
-  </ol>
-</nav>
+<ul class="nav nav-tabs">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+      aria-expanded="false">Chart</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/chart">5 Years</a>
+      <a class="dropdown-item" href="/oneyear">1 Year</a>
+      <a class="dropdown-item" href="/onemonth">1 Month</a>
+    </div>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/Historic_table">Historic Data</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/live">Live Data</a>
+  </li>
+</ul>
+
 <h2 class="text-danger">LIVE::</h2>
 <br>
 <h4>LAST UPDATED...{{update}}</h4>
