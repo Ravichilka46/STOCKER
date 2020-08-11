@@ -185,7 +185,11 @@ def live(request):
             arr.append(q)
         except:
             continue
-    #print(arr)
+    arr1=""
+    for i in range(1,len(arr[0])-1):
+        arr1=arr1+(arr[0][i])
+    #print(arr1)    
+
     volume=soup.find_all(class_="Volume")
     vol=[]
     for i in volume:
@@ -217,7 +221,7 @@ def live(request):
     context={
         "update":a[0],
         "live_price":live_price[0],
-        "arrow":arr[0],
+        "arrow":arr1,
         "volume":vol[0],
         "Open_price":open_price[0],
         "Prev_price":prev_price[0]    
