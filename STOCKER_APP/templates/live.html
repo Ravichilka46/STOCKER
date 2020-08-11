@@ -14,9 +14,16 @@
     <br>
     <br>
     <br>
-    <a>LIVE:::{{live_price}}</a>
+    <p class="text-danger">LIVE::</p>
     <br>
-    <a>! :::{{arrow}}</a>
+    <div class="card-columns">
+      <div class="card bg-primary">
+        <div class="card-body text-center">
+          <p class="card-text">{{live_price}}      {{arrow}}</p>
+        </div>
+      </div>
+    </div>  
+    <br>
     <br>
     <a>Volumes:::{{volume}}</a>
     <br>
