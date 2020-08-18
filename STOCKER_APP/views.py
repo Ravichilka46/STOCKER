@@ -189,8 +189,8 @@ def live(request):
     for i in range(1,len(arr[0])-1):
         arr1=arr1+(arr[0][i])
     #print(arr1)
-    down_arrow=''
-    up_arrow=''
+    down_arrow=""
+    up_arrow=""
     if arr1[0]=="-":
         down_arrow=arr1
     else:
