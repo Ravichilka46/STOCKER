@@ -188,7 +188,14 @@ def live(request):
     arr1=""
     for i in range(1,len(arr[0])-1):
         arr1=arr1+(arr[0][i])
-    #print(arr1)    
+    #print(arr1)
+    down_arrow=''
+    up_arrow=''
+    if arr1[0]=="-":
+        down_arrow=arr1
+    else:
+        up_arrow=arr1
+
 
     volume=soup.find_all(class_="Volume")
     vol=[]
@@ -222,6 +229,8 @@ def live(request):
         "update":a[0],
         "live_price":live_price[0],
         "arrow":arr1,
+        "up_arrow":up_arrow,
+        "down_arrow":down_arrow,
         "volume":vol[0],
         "Open_price":open_price[0],
         "Prev_price":prev_price[0]    
