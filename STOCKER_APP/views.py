@@ -192,9 +192,9 @@ def live(request):
     down_arrow=""
     up_arrow=""
     if arr1[0]=="-":
-        down_arrow=arr1
+        down_arrow = '-' 
     else:
-        up_arrow=arr1
+        up_arrow = '+'
 
 
     volume=soup.find_all(class_="Volume")
