@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.views.generic import View
-   
 from rest_framework.views import APIView 
 from rest_framework.response import Response 
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+import numpy as np
+from sklearn import metrics
 
 a=pd.read_csv('BACKedUP.csv')
 
@@ -53,11 +56,11 @@ for i in range(732,len(date_list)):
 
 post=[{
     'name':'RELIANCE',
-    'work':'NSE'
+    'work':'BSE'
 
 },{
     'name':'TCS',
-    'work':'NSE'
+    'work':'BSE'
 
 
 }]
@@ -236,5 +239,12 @@ def live(request):
         "Prev_price":prev_price[0]    
     }
     return render(request,'live.html',context)   
+
+
+#LINEAR REGRESSION
+
+
+
+
 
 
