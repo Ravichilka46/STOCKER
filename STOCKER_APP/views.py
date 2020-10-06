@@ -201,7 +201,7 @@ def live(request):
     vol=[]
     for i in volume:
         try:
-            w=i.find(id="nseVolume").text
+            w=i.find(id="bseVolume").text
             vol.append(w)
         except:
             continue
