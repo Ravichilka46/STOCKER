@@ -168,11 +168,11 @@ def live(request):
         except:
             continue
     #print(a[0])  
-    price=soup.find_all(class_="stockInfo")
+    price=soup.find_all(class_="stockInfo hidden")
     live_price=[]
     for i in price:
         try:
-            z=i.find(class_="value").text
+            z=i.find(id="bseTradeprice").text
             live_price.append(z)
         except:
             continue
@@ -181,7 +181,7 @@ def live(request):
     arr=[]
     for i in arrow:
         try:
-            q=i.find(id="nsePercentChange").text
+            q=i.find(id="bsePercentChange").text
             arr.append(q)
         except:
             continue
@@ -211,7 +211,7 @@ def live(request):
     prev_price=[]
     for i in openn:
         try:
-            oo=i.find(id="nseOpenprice").text
+            oo=i.find(id="bseOpenprice").text
             open_price.append(oo)
         except:
             continue
@@ -219,8 +219,8 @@ def live(request):
     pre=soup.find_all(class_="Closeprice")
     for i in pre:
         try:
-            pre=i.find(id="nseCloseprice").text
-            prev_price.append(oo)
+            pre=i.find(id="bseCloseprice").text
+            prev_price.append(pre)
         except:
             continue
     #print(prev_price)
