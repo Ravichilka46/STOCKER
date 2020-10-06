@@ -6,7 +6,6 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import numpy as np
-from sklearn import metrics
 
 a=pd.read_csv('BACKedUP.csv')
 
