@@ -8,6 +8,7 @@ urlpatterns = [
     path('subnav', views.subnav,name="Subnav"),
     path('Historic_table', views.HistoricData,name="Historic_table"),
     path('live', views.live,name="Live"),
+    path('prediction', views.prediction,name="Prediction"),
     path('chart', views.HomeView.as_view()), 
     path('api', views.ChartData.as_view()),
     path('oneyear', views.HomeView2.as_view()), 

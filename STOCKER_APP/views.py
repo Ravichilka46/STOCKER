@@ -6,6 +6,11 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
+
+
 
 a=pd.read_csv('BACKedUP.csv')
 
@@ -50,6 +55,14 @@ onemonth_close=[]
 for i in range(732,len(date_list)):
     onemonth_close.append(close_list[i])
 
+
+x=a[["Open Price", "High Price" ,"Low Price","Total Shares"]].values
+y=a["Close Price"].values
+
+x_train, x_test,y_train,y_test = train_test_split(x,y, test_size=0.2 ,random_state=42)
+
+model= LinearRegression()
+model.fit(x_train,y_train)
 
 post=[{
     'name':'RELIANCE',
@@ -239,6 +252,129 @@ def live(request):
 
 
 #LINEAR REGRESSION
+
+def prediction(request):
+    
+    url2=("https://www.moneycontrol.com/india/stockpricequote/refineries/relianceindustries/RI")
+    r2=requests.get(url2)
+
+    htmlcontent2=r2.content
+
+    soup2=BeautifulSoup(htmlcontent2,'html.parser')
+
+    url=("https://economictimes.indiatimes.com/reliance-industries-ltd/stocks/companyid-13215.cms")
+    r=requests.get(url)
+
+    htmlcontent=r.content
+
+    soup=BeautifulSoup(htmlcontent,'html.parser')
+    volume=soup.find_all(class_="Volume")
+    volume_live=[]
+
+    for i in volume:
+        try:
+            w=i.find(id="bseVolume").text
+            temp=w.replace(',','')
+            volume_live.append(temp)
+        except:
+            continue
+    print("VOlume",volume_live)
+
+
+
+    live_low=[]
+    low_soup=soup2.find_all("div",class_="clearfix lowhigh_band todays_lowhigh_wrap")
+    #print(low_soup)
+    for i in low_soup:
+        try:
+            lowprice_live=i.find(class_="low_high1").text
+            #print(lowprice_live)
+            live_low.append(lowprice_live)
+        except:
+            continue
+    #print(live_low)
+    live_low1=[]
+    live_low1.append(live_low[0])
+    print("Low",live_low1)
+
+
+    live_high=[]    
+    high_soup=soup2.find_all("div",class_="clearfix lowhigh_band todays_lowhigh_wrap")
+    for i in high_soup:
+        try:
+            highprice_live=i.find(class_="low_high3").text
+            #print(highprice_live)
+            #aa=highprice_live.find
+            live_high.append(highprice_live)
+        except:
+            continue
+
+    live_high1=[]
+    live_high1.append(live_high[0])
+    print("High",live_high1)
+
+
+
+    openn=soup.find_all(class_="Openprice")
+    open_price=[]
+    prev_close_price=[]
+    for i in openn:
+        try:
+            oo=i.find(id="nseOpenprice").text
+            #print(oo)
+            open_price.append(oo)
+        except:
+            continue
+    print("OpenPrice",open_price)
+
+    pre=soup.find_all(class_="Closeprice")
+    for i in pre:
+        try:
+            pre=i.find(id="nseCloseprice").text
+            #print(pre)
+            prev_close_price.append(pre)
+        except:
+            continue
+    print("CLoseprice",prev_close_price)
+
+    price=soup.find_all(class_="stockInfo")
+
+    #print(price)
+    live_price=[]
+
+
+    for i in price:
+        try:
+            z=i.find(class_="value").text
+            live_price.append(z)
+        except:
+            continue
+    print("Live Price",live_price)
+
+    data_live = {'Open':open_price, 'High':live_high1, 'Low':live_low1, 'Volume':volume_live } 
+  
+    # Create DataFrame 
+    live_df = pd.DataFrame(data_live) 
+    ans=model.predict(live_df)
+
+    context={
+        "live_price":live_price[0],
+        "High_price":live_high1[0],
+        "Low_price":live_low1[0],
+        "volume":volume_live[0],
+        "Open_price":open_price[0],
+        "Prev_price":prev_close_price[0],
+        "answer":ans[0]
+    }
+    return render(request,'prediction.html',context)
+
+
+
+
+
+
+
+
 
 
 
