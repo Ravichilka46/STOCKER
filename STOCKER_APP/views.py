@@ -278,7 +278,7 @@ def prediction(request):
             volume_live.append(temp)
         except:
             continue
-    print("VOlume",volume_live)
+    #print("VOlume",volume_live)
 
 
 
@@ -295,7 +295,7 @@ def prediction(request):
     #print(live_low)
     live_low1=[]
     live_low1.append(live_low[0])
-    print("Low",live_low1)
+    #print("Low",live_low1)
 
 
     live_high=[]    
@@ -311,7 +311,7 @@ def prediction(request):
 
     live_high1=[]
     live_high1.append(live_high[0])
-    print("High",live_high1)
+    #print("High",live_high1)
 
 
 
@@ -325,7 +325,7 @@ def prediction(request):
             open_price.append(oo)
         except:
             continue
-    print("OpenPrice",open_price)
+    #print("OpenPrice",open_price)
 
     pre=soup.find_all(class_="Closeprice")
     for i in pre:
@@ -335,7 +335,7 @@ def prediction(request):
             prev_close_price.append(pre)
         except:
             continue
-    print("CLoseprice",prev_close_price)
+    #print("CLoseprice",prev_close_price)
 
     price=soup.find_all(class_="stockInfo")
 
@@ -349,7 +349,7 @@ def prediction(request):
             live_price.append(z)
         except:
             continue
-    print("Live Price",live_price)
+    #print("Live Price",live_price)
 
     data_live = {'Open':open_price, 'High':live_high1, 'Low':live_low1, 'Volume':volume_live } 
   
