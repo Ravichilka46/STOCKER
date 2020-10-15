@@ -21,13 +21,22 @@
     <a class="nav-link" href="/prediction">Prediction</a>
   </li>
 </ul>
-
+<br>
+<br>
 {%if answer > live_price %}
-<div class="p-3 mb-2 bg-success text-white">PROFITABLE TO INVEST NOW.</div>
-
+<div class="card border-success mb-3" style="max-width: 18rem;">
+  <div class="card-header">PREDICTION--> {{answer}}</div>
+  <div class="card-body text-success">
+    <h5 class="card-title">IDEAL TO INVEST</h5>
+  </div>
+</div>
 {%else%}
-
-<div class="p-3 mb-2 bg-danger text-white">LOSS PREDICTION....INVEST AFTER A WHILE</div>
+<div class="card border-danger mb-3" style="max-width: 18rem;">
+  <div class="card-header">PREDICTION--> {{answer}}</div>
+  <div class="card-body text-danger">
+    <h5 class="card-title">NOT IDEAL TO INVEST</h5>
+  </div>
+</div>
 
 {% endif %}
 
