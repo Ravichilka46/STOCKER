@@ -351,10 +351,13 @@ def prediction(request):
     live_df = pd.DataFrame(data_live) 
     ans=model.predict(live_df)
 
+    answer=[]
+    answer.append(ans)
+
     pred=""
 
-    if ans[0] > live_price[0]:
-        pred = "+"
+    if answer[0] > live_price[0]:
+        pred = '+'
 
     context={
         "live_price":live_price[0],
@@ -363,7 +366,7 @@ def prediction(request):
         "volume":volume_live[0],
         "Open_price":open_price[0],
         "Prev_price":prev_close_price[0],
-        "answer":ans[0],
+        "answer":answer[0],
         "pred":pred
     }
     return render(request,'prediction.html',context)
