@@ -370,7 +370,7 @@ def prediction(request):
         "volume":volume_live[0],
         "Open_price":open_price[0],
         "Prev_price":prev_close_price[0],
-        "answer":answer[0],
+        "answer":ans1[0],
         "pred":pred
     }
     return render(request,'prediction.html',context)
