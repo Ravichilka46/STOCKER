@@ -351,12 +351,16 @@ def prediction(request):
     live_df = pd.DataFrame(data_live) 
     ans=model.predict(live_df)
 
-    answer=[]
-    answer.append(ans)
+    ans1=ans.tolist()
+    str_ans=(str(ans1[0]))
+
+    lv=live_price[0]
+
+
 
     pred=""
 
-    if answer[0] > live_price[0]:
+    if str_ans > lv:
         pred = '+'
 
     context={
