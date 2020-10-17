@@ -67,12 +67,6 @@ model.fit(x_train,y_train)
 post=[{
     'name':'RELIANCE',
     'work':'BSE'
-
-},{
-    'name':'TCS',
-    'work':'BSE'
-
-
 }]
 
 def home(request):
@@ -357,6 +351,11 @@ def prediction(request):
     live_df = pd.DataFrame(data_live) 
     ans=model.predict(live_df)
 
+    pred=""
+
+    if ans[0] > live_price[0]:
+        pred = "+"
+
     context={
         "live_price":live_price[0],
         "High_price":live_high1[0],
@@ -364,7 +363,8 @@ def prediction(request):
         "volume":volume_live[0],
         "Open_price":open_price[0],
         "Prev_price":prev_close_price[0],
-        "answer":ans[0]
+        "answer":ans[0],
+        "pred":pred
     }
     return render(request,'prediction.html',context)
 
