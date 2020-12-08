@@ -275,6 +275,7 @@ def live(request):
 
 def prediction(request):
     
+    
     url2=("https://www.moneycontrol.com/india/stockpricequote/refineries/relianceindustries/RI")
     r2=requests.get(url2)
 
@@ -335,41 +336,43 @@ def prediction(request):
 
 
 
-    openn=soup.find_all(class_="Openprice")
-    open_price=[]
-    prev_close_price=[]
-    for i in openn:
-        try:
-            oo=i.find(id="nseOpenprice").text
-            #print(oo)
-            open_price.append(oo)
-        except:
-            continue
-    #print("OpenPrice",open_price)
+    pre=soup2.find_all("div",class_="clearfix mkt_openclosebx")
 
-    pre=soup.find_all(class_="Closeprice")
+    prev_price=[]
+    open_price=[]
+    open_price1=[]
+    prev_price1=[]
     for i in pre:
         try:
-            pre=i.find(id="nseCloseprice").text
-            #print(pre)
-            prev_close_price.append(pre)
+            prev=i.find(class_="prev_open priceprevclose").text
+            prev_price1.append(prev)
         except:
             continue
-    #print("CLoseprice",prev_close_price)
+    prev_price.append(prev_price1[0])
+    #print("Prev_Close",prev_price)
 
-    price=soup.find_all(class_="stockInfo")
+    for i in pre:
+        try:
+            ope=i.find(class_="prev_open priceopen").text
+            open_price1.append(ope)
+        except:
+            continue
+    open_price.append(open_price1[0])
+    #print("Open",open_price)
 
-    #print(price)
+
     live_price=[]
-
-
+    price=soup.find_all(class_="bse_tab")
+    live_price1=[]
     for i in price:
         try:
-            z=i.find(class_="value").text
-            live_price.append(z)
+            z=i.find("span",class_="ltp").text
+            live_price1.append(z)
         except:
             continue
-    #print("Live Price",live_price)
+    live_price.append(live_price1[0])
+    #print("Live",live_price)
+
 
     data_live = {'Open':open_price, 'High':live_high1, 'Low':live_low1, 'Volume':volume_live } 
   
@@ -395,7 +398,7 @@ def prediction(request):
         "Low_price":live_low1[0],
         "volume":volume_live[0],
         "Open_price":open_price[0],
-        "Prev_price":prev_close_price[0],
+        "Prev_price":prev_price[0],
         "answer":ans1[0],
         "pred":pred
     }
