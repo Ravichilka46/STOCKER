@@ -289,17 +289,22 @@ def prediction(request):
     htmlcontent=r.content
 
     soup=BeautifulSoup(htmlcontent,'html.parser')
-    volume=soup.find_all(class_="Volume")
+    
+    volume=soup2.find_all("div",class_="clearfix")
     volume_live=[]
+    volume_live1=[]
+    #print(volume)
 
     for i in volume:
         try:
-            w=i.find(id="bseVolume").text
-            temp=w.replace(',','')
-            volume_live.append(temp)
+            w=i.find("span",class_="txt13_pc volume_data").text
+            volume_live1.append(w)
         except:
             continue
+    volume_live.append(volume_live1[0])
     #print("VOlume",volume_live)
+
+
 
 
 
@@ -360,7 +365,6 @@ def prediction(request):
     open_price.append(open_price1[0])
     #print("Open",open_price)
 
-
     live_price=[]
     price=soup.find_all(class_="bse_tab")
     live_price1=[]
@@ -371,7 +375,9 @@ def prediction(request):
         except:
             continue
     live_price.append(live_price1[0])
-    #print("Live",live_price)
+    print("Live",live_price)
+
+    
 
 
     data_live = {'Open':open_price, 'High':live_high1, 'Low':live_low1, 'Volume':volume_live } 
