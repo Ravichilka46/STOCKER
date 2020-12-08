@@ -298,6 +298,7 @@ def prediction(request):
     for i in volume:
         try:
             w=i.find("span",class_="txt13_pc volume_data").text
+            w.replace(",","")
             volume_live1.append(w)
         except:
             continue
