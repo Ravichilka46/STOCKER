@@ -160,42 +160,80 @@ def HistoricData(request):
 
 def live(request):
 
+        
     url=("https://economictimes.indiatimes.com/reliance-industries-ltd/stocks/companyid-13215.cms")
     r=requests.get(url)
 
     htmlcontent=r.content
 
     soup=BeautifulSoup(htmlcontent,'html.parser')
-    time=soup.find_all("div",class_="nse_d dateTime")
+
+
+
+
+    url2=("https://www.moneycontrol.com/india/stockpricequote/refineries/relianceindustries/RI")
+    r2=requests.get(url2)
+
+    htmlcontent2=r2.content
+    soup2=BeautifulSoup(htmlcontent2,'html.parser')
+
+    prev_price=[]
+    open_price=[]
+
+    pre=soup2.find_all("div",class_="clearfix mkt_openclosebx")
+
+    for i in pre:
+        try:
+            prev=i.find(class_="prev_open priceprevclose").text
+            prev_price.append(prev)
+        except:
+            continue
+    print(prev_price[0])
+
+    for i in pre:
+        try:
+            ope=i.find(class_="prev_open priceopen").text
+            open_price.append(ope)
+        except:
+            continue
+    print(open_price[0])
+
+
     a=[]
+    time=soup.find_all("div",class_="s_container")
     for i in (time):
         try:
-            b=i.find("span",class_="_date").text
+            b=i.find("span",class_="updatedDateTime").text
             a.append(b)
         except:
             continue
-    #print(a[0])  
-    price=soup.find_all(class_="stockInfo hidden")
+    print(a[0])  
+    #print(a[0])
+
+    price=soup.find_all(class_="bse_tab")
     live_price=[]
     for i in price:
         try:
-            z=i.find(id="bseTradeprice").text
+            z=i.find("span",class_="ltp").text
             live_price.append(z)
         except:
             continue
-    #print(live_price)
-    arrow=soup.find_all(class_="data")
+    print(live_price[0])
+
+    arrow=soup.find_all(class_="bse_tab")
     arr=[]
     for i in arrow:
         try:
-            q=i.find(id="bsePercentChange").text
+            q=i.find("span",class_="absoluteChange").text
             arr.append(q)
         except:
             continue
     arr1=""
-    for i in range(1,len(arr[0])-1):
-        arr1=arr1+(arr[0][i])
-    #print(arr1)
+    #print(arr[0])
+    arr1=arr1+arr[0]
+
+    print((arr1))
+
     down_arrow=""
     up_arrow=""
     if arr1[0]=="-":
@@ -203,34 +241,22 @@ def live(request):
     else:
         up_arrow = '+'
 
+    print(up_arrow)
+    print(down_arrow)
 
-    volume=soup.find_all(class_="Volume")
+
+
+
+    volume=soup.find_all(class_="bse_tab")
     vol=[]
     for i in volume:
         try:
-            w=i.find(id="bseVolume").text
+            w=i.find("span",class_="volume").text
             vol.append(w)
         except:
             continue
-    #print(vol)
-    openn=soup.find_all(class_="Openprice")
-    open_price=[]
-    prev_price=[]
-    for i in openn:
-        try:
-            oo=i.find(id="bseOpenprice").text
-            open_price.append(oo)
-        except:
-            continue
-    #print(open_price)
-    pre=soup.find_all(class_="Closeprice")
-    for i in pre:
-        try:
-            pre=i.find(id="bseCloseprice").text
-            prev_price.append(pre)
-        except:
-            continue
-    #print(prev_price)
+    print(vol[0])
+    
 
     context={
         "update":a[0],
