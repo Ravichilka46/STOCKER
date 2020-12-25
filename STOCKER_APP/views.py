@@ -180,35 +180,38 @@ def live(request):
     prev_price=[]
     open_price=[]
 
-    pre=soup2.find_all("div",class_="clearfix mkt_openclosebx")
+
+    pre=soup2.find_all("div",class_="oview_table")
 
     for i in pre:
         try:
-            prev=i.find(class_="prev_open priceprevclose").text
+            prev=i.find(class_="nseprvclose bseprvclose").text
             prev_price.append(prev)
         except:
             continue
-    print(prev_price[0])
+
+    #print(prev_price[0])
 
     for i in pre:
         try:
-            ope=i.find(class_="prev_open priceopen").text
+            ope=i.find(class_="nseopn bseopn").text
             open_price.append(ope)
         except:
             continue
-    print(open_price[0])
+    #print(open_price[0])
 
 
     a=[]
-    time=soup.find_all("div",class_="s_container")
+    time=soup2.find_all("div",class_="indimprice")
     for i in (time):
         try:
-            b=i.find("span",class_="updatedDateTime").text
+            b=i.find(class_="bseasondate").text
             a.append(b)
         except:
             continue
-    print(a[0])  
-    #print(a[0])
+
+    #print(a[0])  
+    
 
     price=soup.find_all(class_="bse_tab")
     live_price=[]
@@ -218,21 +221,22 @@ def live(request):
             live_price.append(z)
         except:
             continue
-    print(live_price[0])
 
-    arrow=soup.find_all(class_="bse_tab")
+    #print(live_price[0])
+
+    arrow=soup2.find_all("div",class_="indimprice")
     arr=[]
     for i in arrow:
         try:
-            q=i.find("span",class_="absoluteChange").text
+            q=i.find("div",class_="pricupdn bsechange grn").text
             arr.append(q)
         except:
             continue
     arr1=""
     #print(arr[0])
-    arr1=arr1+arr[0]
-
-    print((arr1))
+    arr1=arr1+arr[0][0:6]
+    #print(arr)
+    #print(arr1)
 
     down_arrow=""
     up_arrow=""
@@ -241,21 +245,22 @@ def live(request):
     else:
         up_arrow = '+'
 
-    print(up_arrow)
-    print(down_arrow)
+    #print(up_arrow)
+    #print(down_arrow)
 
 
 
 
-    volume=soup.find_all(class_="bse_tab")
+    volume=soup2.find_all("div",class_="indprirange")
     vol=[]
     for i in volume:
         try:
-            w=i.find("span",class_="volume").text
+            w=i.find(class_="rangamount bsevol").text
             vol.append(w)
         except:
             continue
-    print(vol[0])
+    #print(vol[0])
+    
     
 
     context={
@@ -290,14 +295,15 @@ def prediction(request):
 
     soup=BeautifulSoup(htmlcontent,'html.parser')
     
-    volume=soup2.find_all("div",class_="clearfix")
+    
     volume_live=[]
     volume_live1=[]
     #print(volume)
+    volume=soup2.find_all("div",class_="indprirange")
 
     for i in volume:
         try:
-            w=i.find("span",class_="txt13_pc volume_data").text
+            w=i.find(class_="rangamount bsevol").text
             volume_live1.append(w)
         except:
             continue
@@ -309,68 +315,54 @@ def prediction(request):
     #print("VOlume",volume_live)
 
 
-
-
-
     live_low=[]
-    low_soup=soup2.find_all("div",class_="clearfix lowhigh_band todays_lowhigh_wrap")
-    #print(low_soup)
+    live_low1=[]
+    low_soup=soup2.find_all("div",class_="oview_table")
+
     for i in low_soup:
         try:
-            lowprice_live=i.find(class_="low_high1").text
-            #print(lowprice_live)
+            lowprice_live=i.find(class_="nselower_circuit_limit bselower_circuit_limit").text
             live_low.append(lowprice_live)
         except:
             continue
+
     #print(live_low)
-    live_low1=[]
     live_low1.append(live_low[0])
-    #print("Low",live_low1)
 
 
     live_high=[]    
-    high_soup=soup2.find_all("div",class_="clearfix lowhigh_band todays_lowhigh_wrap")
+    high_soup=soup2.find_all("div",class_="oview_table")
     for i in high_soup:
         try:
-            highprice_live=i.find(class_="low_high3").text
-            #print(highprice_live)
-            #aa=highprice_live.find
+            highprice_live=i.find(class_="nseupper_circuit_limit bseupper_circuit_limit").text
             live_high.append(highprice_live)
         except:
             continue
 
     live_high1=[]
     live_high1.append(live_high[0])
-    #print("High",live_high1)
+    #print("live High",live_high1)
 
 
-
-    pre=soup2.find_all("div",class_="clearfix mkt_openclosebx")
-
-    prev_price=[]
     open_price=[]
-    open_price1=[]
-    prev_price1=[]
+    open_price1=[]    
+    
+    pre=soup2.find_all("div",class_="oview_table")
+    
     for i in pre:
         try:
-            prev=i.find(class_="prev_open priceprevclose").text
-            prev_price1.append(prev)
-        except:
-            continue
-    prev_price.append(prev_price1[0])
-    #print("Prev_Close",prev_price)
-
-    for i in pre:
-        try:
-            ope=i.find(class_="prev_open priceopen").text
+            ope=i.find(class_="nseopn bseopn").text
             open_price1.append(ope)
         except:
             continue
     open_price.append(open_price1[0])
     #print("Open",open_price)
 
-    live_price=[]
+    
+    
+    
     price=soup.find_all(class_="bse_tab")
+    live_price=[]
     live_price1=[]
     for i in price:
         try:
@@ -378,10 +370,11 @@ def prediction(request):
             live_price1.append(z)
         except:
             continue
-    live_price.append(live_price1[0])
-    print("Live",live_price)
 
-    
+    live_price.append(live_price[0])
+
+
+
 
 
     data_live = {'Open':open_price, 'High':live_high1, 'Low':live_low1, 'Volume':volume_live } 
@@ -408,7 +401,6 @@ def prediction(request):
         "Low_price":live_low1[0],
         "volume":volume_live[0],
         "Open_price":open_price[0],
-        "Prev_price":prev_price[0],
         "answer":ans1[0],
         "pred":pred
     }
