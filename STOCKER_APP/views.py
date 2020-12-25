@@ -371,7 +371,7 @@ def prediction(request):
         except:
             continue
 
-    live_price.append(live_price[0])
+    live_price.append(live_price1[0])
 
 
 
