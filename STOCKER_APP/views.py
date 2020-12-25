@@ -327,7 +327,9 @@ def prediction(request):
             continue
 
     #print(live_low)
-    live_low1.append(live_low[0])
+    low_temp=live_low[0]
+    low_temp=low_temp.replace(",","")
+    live_low1.append(low_temp)
 
 
     live_high=[]    
@@ -340,7 +342,9 @@ def prediction(request):
             continue
 
     live_high1=[]
-    live_high1.append(live_high[0])
+    high_temp=live_high[0]
+    high_temp=high_temp.replace(",","")
+    live_high1.append(high_temp)
     #print("live High",live_high1)
 
 
