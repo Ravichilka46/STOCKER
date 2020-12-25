@@ -355,7 +355,11 @@ def prediction(request):
             open_price1.append(ope)
         except:
             continue
-    open_price.append(open_price1[0])
+
+
+    openn=open_price1[0]
+    openn=openn.replace(",","")
+    open_price.append(openn)
     #print("Open",open_price)
 
     
@@ -387,6 +391,7 @@ def prediction(request):
     str_ans=(str(ans1[0]))
 
     lv=live_price[0]
+
 
 
 
